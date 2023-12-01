@@ -1,0 +1,106 @@
+<!DOCTYPE html> <html lang="en"> <head>
+    <meta charset="UTF-8">
+    <title>Profile</title> 
+</head>
+
+<body>
+    !-- <div id="root"></div> -->
+
+    <table border="0" width="100%">
+        <!-- Row to define the four columns -->
+        <tr>
+            <!-- First Column: Kanbas Navigation Sidebar -->
+            <td valign="top">
+                <h2>Profile Navigation</h2>
+                <ul>
+                    <li><a href="#">Account</a></li>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Courses</a></li>
+                    <li><a href="#">Calendar</a></li>
+                    <li><a href="#">Inbox</a></li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </td>
+    
+            <!-- Second Column: Course Navigation Sidebar -->
+            <td valign="top">
+                <h2>Journey Navigation</h2>
+                <ul>
+                    <li><a href="project/home.html">Home</a></li>
+                    <li><a href="#">Modules</a></li>
+                    <li><a href="#">Piazza</a></li>
+                    <li><a href="#">Zoom Meetings</a></li>
+                    <li><a href="#">Assignments</a></li>
+                    <li><a href="#">Quizzes</a></li>
+                    <li><a href="#">Grades</a></li>
+                    <li><a href="#">People</a></li>
+                    <li><a href="#">Panopto Video</a></li>
+                    <li><a href="#">Discussions</a></li>
+                    <li><a href="#">Announcements</a></li>
+                    <li><a href="#">Pages</a></li>
+                    <li><a href="#">Files</a></li>
+                    <li><a href="#">Rubrics</a></li>
+                    <li><a href="#">Outcomes</a></li>
+                    <li><a href="#">Collaborations</a></li>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="#">Settings</a></li>
+                </ul>
+            </td>
+
+            <!-- Third Column: Profile Screen -->
+            <td valign="top">
+
+                <!-- Profile Screen -->
+<div id="profile-screen">
+    <h1>Profile</h1>
+    <table>
+        <tr>
+            <th>Name:</th>
+            <td>John Doe</td>
+        </tr>
+        <tr>
+            <th>Contact:</th>
+            <td>johndoe@example.com</td>
+        </tr>
+        <tr>
+            <th>Biography:</th>
+            <td>John is a software developer from San Francisco.</td>
+        </tr>
+        <tr>
+            <th>Links:</th>
+            <td><a href="#">http://johndoe.com</a></td>
+        </tr>
+    </table>
+
+    <!-- Navigation to Edit Profile -->
+    <a href="#profile-editing-screen">Edit Profile</a>
+</div>
+
+<!-- Profile Editing Screen -->
+<div id="profile-editing-screen" style="display: none;">
+    <h1>Edit Profile</h1>
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="John Doe">
+        <br>
+
+        <label for="contact">Contact:</label>
+        <input type="email" id="contact" name="contact" value="johndoe@example.com">
+        <br>
+
+        <label for="biography">Biography:</label>
+        <textarea id="biography" name="biography">John is a software developer from San Francisco.</textarea>
+        <br>
+
+        <label for="links">Links:</label>
+        <input type="url" id="links" name="links" value="http://johndoe.com">
+        <br>
+
+        <!-- Save and Cancel Buttons -->
+        <input type="submit" value="Save Profile">
+        <button type="button" onclick="document.getElementById('profile-editing-screen').style.display='none';document.getElementById('profile-screen').style.display='block'">Cancel Editing</button>
+    </form>
+</div>
+
+</body>
+</html>

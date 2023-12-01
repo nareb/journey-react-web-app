@@ -1,0 +1,64 @@
+.kanbas-sidebar {
+    background-color: black;
+    width: 80px; /* As it's between 75 and 85px */
+    color: white; /* Default color for text inside the sidebar */
+    text-align: center;
+}
+
+.kanbas-sidebar .nav-link {
+    background-color: black;
+    color: white;
+    margin: 7px 0;  /* Margin between 5 and 10px */
+    padding: 7px;  /* Padding between 5 and 10px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;  /* Stack items vertically */
+}
+
+.kanbas-sidebar .nav-link:hover {
+    text-decoration: none;
+    color: red; /* Adjust color as desired for hover effect */
+}
+
+.kanbas-sidebar .nav-link.active {
+    background-color: white;
+    color: red; /* Color for active link text */
+}
+
+.nav-link .fas {
+    color: red;
+}
+
+.nav-link .fa-user {
+    color: red;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+.row.no-gutters > .col {
+    padding-right: 0;
+    padding-left: 0;
+
+}
+
+/* Styles for the Course Navigation sidebar */
+.sidebar .nav-link {
+    color: red;
+}
+
+.sidebar .nav-link.active {
+    color: black; /* Text color for the active link */
+}
+
+.kanbas-sidebar .fas {
+    margin-bottom: 5px;  /* Space below the icon */
+}
+
+.kanbas-sidebar .nav-link span {
+    font-size: 12px;  /* Adjust as needed */
+}
+

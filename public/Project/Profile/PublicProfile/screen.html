@@ -1,0 +1,194 @@
+<head>
+    <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+
+<div class="container">
+    <div class="row no-gutters">
+
+    <!-- Profile Navigation -->
+        <div class="project-sidebar">
+            <h2><img src="logo.png" width="80" alt="Logo"></h2>
+            <ul class="nav flex-column ">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Home/screen.html">
+                        <i class="fas fa-home"></i> 
+                        <span>Home</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/Project/Profile/PublicProfile/screen.html">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Details/screen.html">
+                        <i class="fas fa-info-circle"></i> 
+                        <span>Details</span>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Login/screen.html">
+                        <i class="fas fa-sign-in-alt"></i> 
+                        <span>Login</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Search/screen.html">
+                        <i class="fas fa-search"></i> 
+                        <span>Search</span>
+                    </a>
+                </li>
+
+                
+            </ul>
+        </div>
+    
+
+    
+        <div class="sidebar pr-3">
+            <div class="col-md-auto">
+            <h6>Only Me</h6>
+            <ul class="nav flex-column">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/Project/Profile/PrivateProfile/screen.html">
+                        <span>Edit Profile</span>
+                    </a>
+                </li>
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Account/Profile/screen.html">
+                        Public Profile
+                    </a>
+                </li>
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Account/Inbox/screen.html">
+                        Messages
+                    </a>
+                </li>
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Account/Gallery/screen.html">
+                        Gallery
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Profile/Settings/screen.html">
+                        Settings
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Project/Profile/Friends/screen.html">
+                        Friends
+                    </a>
+                </li>
+                
+
+            </ul>
+        </div>
+        </div>
+
+        <!-- Third Column:  Profile Screen -->
+    
+        <div class="col-md-7 pl-3 mt-3">
+
+            <!-- Profile Icon and Name -->
+            <div class="d-flex align-items-center mb-4">
+                <i class="fas fa-user fa-3x mr-3"></i>
+                <h2>Moon Light</h2>
+            </div>
+
+            <button type="button" class="btn btn-primary mt-3" onclick="toggleProfileEditing()">
+                <i class="fas fa-pencil-alt"></i> Edit Profile
+            </button>
+
+            <input type="submit" value="Save Profile" class="btn btn-danger mb-2 d-none" id="saveButton">
+
+            <button type="button" class="btn btn-secondary float-end" onclick="toggleProfileEditing()">
+                <i class="fas fa-pencil-alt"></i> Cancel Editing
+            </button>
+
+            <ul class="list-group mb-3">
+                <li class="list-group-item">
+                    <strong>Contact:</strong> No registered services, you can add some on the settings page
+                </li>
+                <li class="list-group-item">
+                    <strong>Biography:</strong> Student
+                </li>
+                <li class="list-group-item">
+                    <strong>Links:</strong> <a href="https://www.youtube.com/YOUR_CHANNEL" target="_blank">YouTube</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="edit-profile" style="display:none;" class="mt-3">
+            <form>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" value="Binita Shakya" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="pronouns">Pronouns:</label>
+                    <input type="text" id="pronouns" name="pronouns" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="biography">Biography:</label>
+                    <textarea id="biography" name="biography" class="form-control">Student</textarea>
+                </div>
+        
+                <div class="form-group">
+                    <label>Links:</label>
+                    <div class="row">
+                        <div class="col">
+                            <input type="text" placeholder="Title" class="form-control">
+                        </div>
+                        <div class="col">
+                            <input type="url" placeholder="URL" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-pencil-alt"></i> Save Profile
+                </button>
+        
+                <button type="button" class="btn btn-secondary float-end" onclick="toggleProfileEditing()">
+                    <i class="fas fa-pencil-alt"></i> Cancel Editing
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script src="scripts.js"></script>
+</body>
