@@ -1,16 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+
 
 function Nav() {
   const { pathname } = useLocation();
   const links = [
     { to: "/project/home", label: "Home" },
     { to: "/project/search", label: "Search" },
+    { to: "/project/details", label: "Details" },
+    { to: "/project/profile", label: "Profile" },
     { to: "/project/signin", label: "Signin" },
-    { to: "/project/signup", label: "Signup" },
     { to: "/project/account", label: "Account" },
+    { to: "/project/signup", label: "Signup" },
+    
+    
     //{ to: "/project/admin", label: "Admin" },
     //{ to: "/project/courses", label: "Courses" },
   ];
@@ -35,6 +40,7 @@ export default Nav;
 /*
 function Navigation() {
   const { currentUser } = useSelector((state) => state.userReducer);
+  //const { currentUser } = useSelector((state) => state.user);
   return (
     <>
       <div className="list-group">
@@ -64,7 +70,7 @@ function Navigation() {
         </Link>
         {/* <Link to="/project/details" className="list-group-item">
         Details
-      </Link> }
+        </Link> }
       </div>
     </>
   );
@@ -72,4 +78,5 @@ function Navigation() {
 
 export default Navigation;
 */
+
 

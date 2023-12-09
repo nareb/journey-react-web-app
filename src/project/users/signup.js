@@ -38,7 +38,8 @@ function Signup() {
     } catch (err) {
       //if (err.response && err.response.data) {
       if (err.code === 11000) {
-        setError(err.response.data.message || "Username is already taken. Please choose a different one.");
+        setError(err.response.data.message || 
+          "Username is already taken. Please choose a different one.");
       } else {
         setError("An error occurred during signup.");
       }
@@ -78,7 +79,11 @@ function Signup() {
           ...credentials,
           password: e.target.value })} 
       />
-      <button onClick={signup} className="btn btn-primary">
+      <button 
+        onClick={signup} 
+        className={`btn btn-primary ${usernameAvailable === false ? "disabled" : ""}`}
+        disabled={usernameAvailable === false}
+      >
         Register
       </button>
     </div>

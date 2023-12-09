@@ -1,0 +1,195 @@
+.kanbas-sidebar {
+    background-color: black;
+    width: 80px; /* As it's between 75 and 85px */
+    color: white; /* Default color for text inside the sidebar */
+    text-align: center;
+}
+
+.kanbas-sidebar .nav-link {
+    background-color: black;
+    color: white;
+    margin: 7px 0;  /* Margin between 5 and 10px */
+    padding: 7px;  /* Padding between 5 and 10px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;  /* Stack items vertically */
+}
+
+.kanbas-sidebar .nav-link:hover {
+    text-decoration: none;
+    color: red; /* Adjust color as desired for hover effect */
+}
+
+.kanbas-sidebar .nav-link.active {
+    background-color: white;
+    color: red; /* Color for active link text */
+}
+
+.nav-link .fas {
+    color: red;
+}
+
+.nav-link .fa-user {
+    color: red;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+.row.no-gutters > .col {
+    padding-right: 0;
+    padding-left: 0;
+
+}
+
+/* Styles for the Course Navigation sidebar */
+.sidebar .nav-link {
+    color: red;
+}
+
+.sidebar .nav-link.active {
+    color: black; /* Text color for the active link */
+}
+
+.kanbas-sidebar .fas {
+    margin-bottom: 5px;  /* Space below the icon */
+}
+
+.kanbas-sidebar .nav-link span {
+    font-size: 12px;  /* Adjust as needed */
+}
+
+
+.nav-link .fas {
+    color: red;
+}
+
+.nav-link .fa-user {
+    color: red;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+.row.no-gutters > .col {
+    padding-right: 0;
+    padding-left: 0;
+
+}
+
+/* Styles for the Course Navigation sidebar */
+.sidebar .nav-link {
+    color: red;
+}
+
+.sidebar .nav-link.active {
+    color: black; /* Text color for the active link */
+}
+
+.rectangle {
+    width: 100%;
+    height: 150px;  /* adjust the height */
+    background-color: white;  /* Adjust the color */
+    border-radius: 10px;  /* Rounded corners */
+    margin-bottom: 15px;  /* Space between the rectangle and its description */
+    position: relative;  /* This ensures the inner content aligns correctly */
+    overflow: visible;  /* Keeps child content within the boundaries */
+    border: 2px solid gray;
+}
+
+
+.rectangles-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.rectangle-top {
+    width: 100%;
+    height: 50%;  /* Makes it occupy the top half of the rectangle */
+    background-color: rgb(135, 206, 250);  /* desired color */
+}
+
+.rectangle-text {
+    width: 100%;
+    height: 50%;  /* Makes it occupy the bottom half of the rectangle */
+    display: flex;
+    align-items: center;  /* Vertical centering */
+    justify-content: center;  /* Horizontal centering */
+    color: rgb(173, 174, 230);  /* Same color as the top */
+    background-color: transparent;  /* Ensures text's background doesn't cover the top half */
+}
+
+/* Color Class 1: Blue */
+.rectangle-bluea .rectangle-top {
+    background-color: rgb(0, 174, 255);
+}
+
+.rectangle-blue .rectangle-text,
+.rectangle-blue {
+    border-color: rgb(0, 174, 255);
+    color: rgb(0, 174, 255);
+}
+
+/* Color Class 2: Gray */
+.rectangle-gray .rectangle-top {
+    background-color: gray;
+}
+
+.rectangle-gray .rectangle-text,
+.rectangle-gray {
+    border-color: gray;
+    color: gray;
+}
+
+.course-card {
+    padding: 35px 15px; /* Adjust this for the white spacing above and below each course */
+    max-width: 270px; /* Max width requirement */
+    min-width: 250px; /* Min width requirement */
+    box-sizing: border-box;
+}
+
+/* As .rectangle-col has hardcoded widths, the flex property needs to be overridden */
+.course-card .rectangle-col {
+    flex: none;
+    width: 100%;
+    padding: 0; /* remove the previous padding */
+    float: none; /* remove float */
+    margin-bottom: 0; /* reset the margin */
+}
+
+.course-card .card {
+    height: 150px;  /* Set the card height to match the rectangle's height */
+}
+
+.card {
+    border: none; /* removes default border */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Ensures inner contents don't spill out */
+}
+
+.card-img-top {
+    border: 1px solid;
+    height: 50%;
+    border-top-left-radius: 10px; /* Rounded top-left corner */
+    border-top-right-radius: 10px; /* Rounded top-right corner */
+}
+
+.card-body {
+    height: 50%;
+    display: flex;  /* Using flex to vertically align text */
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Adding a little padding for better appearance */
+    border: 1px solid; 
+    border-bottom-left-radius: 10px; /* Rounded top-left corner */
+    border-bottom-right-radius: 10px; /* Rounded top-right corner */
+}
+
+.card-text {
+    text-align: center;
+    margin: 0; /* override default card-text margin */
+}

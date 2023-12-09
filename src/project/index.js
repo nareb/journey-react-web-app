@@ -3,6 +3,7 @@ import Home from "./home";
 //import Profile from "./profile";
 import Search from "./search";
 import Details from "./details";
+import Profile from "./profile";
 import { Routes, Route} from "react-router-dom";
 //import { Routes, Route, Link } from "react-router-dom";
 //import { useState } from "react";
@@ -33,9 +34,11 @@ function Project() {
             <div className="col-10">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home/>} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/account" element={<Account />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/search" element={<Search />} />
                 <Route path="/search/:search" element={<Search />} />
                 <Route path="/details/:albumId" element={<Details />} />
