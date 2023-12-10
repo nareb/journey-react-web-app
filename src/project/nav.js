@@ -10,6 +10,7 @@ function Nav() {
     { to: "/project/home", label: "Home" },
     { to: "/project/search", label: "Search" },
     { to: "/project/details", label: "Details" },
+    { to: "/project/dashboard", label: "Dashboard" },
     { to: "/project/profile", label: "Profile" },
     //{ to: "/project/signin", label: "Signin" },
     { to: "/project/account", label: "Account" },

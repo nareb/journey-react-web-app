@@ -1,6 +1,7 @@
 import Home from "./home";
 //import Login from "./login";
 //import Profile from "./profile";
+import Dashboard from "./Dashboard";
 import Search from "./search";
 import Details from "./details";
 import Profile from "./profile";
@@ -35,6 +36,7 @@ function Project() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home/>} />
+                <Route path="/details" element={<Dashboard/>}/>
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/account" element={<Account />} />
