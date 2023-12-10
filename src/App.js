@@ -11,7 +11,7 @@ function App() {
     <HashRouter>
       <div>
         <Routes>
-          <Route path="/" element={<Navigate to="project" />} />
+          <Route path="/" element={<Navigate to="journey" />} />
           <Route path="/project/*" element={<Project />} />
           <Route path="/journey/*" element={<Journey />} />
         </Routes>
