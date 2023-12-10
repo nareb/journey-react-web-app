@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as client from "./client";
-import { setCurrentUser } from "./reducer";
+import { setCurrentUser } from "./userReducer";
 
 function Login() {
   const [error, setError] = useState(null);

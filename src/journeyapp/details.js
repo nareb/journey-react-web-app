@@ -1,4 +1,4 @@
-function Details() {
+function JDetails() {
   return (
     <div className="card">
       <h4 className="card-header">Details</h4>
@@ -11,4 +11,4 @@ function Details() {
   );
 }
 
-export default Details;
+export default JDetails;

@@ -3,22 +3,28 @@ import * as client from "./client";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { FaThumbsUp } from "react-icons/fa";
 
-function Search() {
+function MovieSearch() {
   const { search } = useParams();
-  const [searchTerm, setSearchTerm] = useState(search || "beatles");
+  const [searchTerm, setSearchTerm] = useState(search || "batman");
   const [results, setResults] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
 
-  const fetchAlbums = async (search) => {
-    const results = await client.findAlbums(search);
+  //   const fetchAlbums = async (search) => {
+  //     const results = await client.findAlbums(search);
+  //     setResults(results);
+  //     setSearchTerm(search);
+  //     setIsSearching(false);
+  //   };
+  const fetchMovies = async (search) => {
+    const results = await client.findMovies(search);
     setResults(results);
     setSearchTerm(search);
     setIsSearching(false);
   };
 
   const viewdetails = (id) => {
-    navigate(`/journey/album/details/${id}`);
+    navigate(`/journey/movie/details/${id}`);
   };
   const formatDate = (string) => {
     var options = { year: "numeric", month: "numeric", day: "numeric" };
@@ -29,13 +35,14 @@ function Search() {
     if (search) {
       setResults(null);
       setIsSearching(true);
-      fetchAlbums(search);
+      //fetchAlbums(search);
+      fetchMovies(search);
     }
   }, [search]);
 
   return (
     <div className="card">
-      <h4 className="card-header">Search</h4>
+      <h4 className="card-header">Movie Search</h4>
       <div className="card-body">
         <div className="row">
           <div className="input-group mb-3">
@@ -54,7 +61,7 @@ function Search() {
               className="btn btn-outline-primary"
               type="button"
               id="button-addon"
-              onClick={() => navigate(`/journey/search/${searchTerm}`)}
+              onClick={() => navigate(`/journey/moviesearch/${searchTerm}`)}
             >
               Search
             </button>
@@ -73,31 +80,29 @@ function Search() {
               <table className="table table-hover table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Album</th>
-                    <th scope="col">Artist Name</th>
+                    <th scope="col">Title</th>
                     <th scope="col">Release Date</th>
-                    <th scope="col">Album Cover</th>
+                    <th scope="col">Poster</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {results.map((album, index) => (
+                  {results.map((movie, index) => (
                     <tr>
-                      <td>{album.name}</td>
-                      <td>{album.artistName}</td>
-                      <td>{formatDate(album.released)}</td>
+                      <td>{movie.title}</td>
+                      <td>{movie.release_date}</td>
                       <td>
                         <img
-                          src={`https://api.napster.com/imageserver/v2/albums/${album.id}/images/50x50.jpg`}
-                          alt={album.name}
-                          //height="50px"
+                          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                          alt={movie.title}
+                          height="50px"
                         />
                       </td>
                       <td>
                         <button
                           title="View Details"
-                          onClick={() => viewdetails(album.id)}
+                          onClick={() => viewdetails(movie.id)}
                           className="btn btn-outline-primary"
                         >
                           View
@@ -125,4 +130,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default MovieSearch;
