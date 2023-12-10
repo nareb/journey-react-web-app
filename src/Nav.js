@@ -3,7 +3,7 @@ function Nav() {
  return (
    <nav className="nav nav-tabs mt-2">
      
-     <Link className="nav-link" to="/Project">Project</Link>
+     <Link className="nav-link" to="/Journey">Journey</Link>
 
 </nav>
 ); }
