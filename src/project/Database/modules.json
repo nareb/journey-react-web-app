@@ -1,0 +1,74 @@
+[
+    {
+      "_id": "CS5610",
+      "name": "Week 0 - INTRO",
+      "description": "Learning Objectives",
+      "course": "CS5610",
+      "lessons": [
+
+        {
+          "name": "LEARNING OBJECTIVES",
+          "description": [
+            "Introduction to the Course",
+            "Learn what is Web Development",
+            "Creating a development environment",
+            "Creating a Web Application",
+            "Getting started with a 1st Assignment"
+          ]                 
+        },
+
+        {
+          "name": "READING",
+          "description": [
+            "Full Stack Developer - Chapter 1 - Introduction.",
+            "Full Stack Developmer - Chapter 2 - Creating User Interfaces with HTML"
+          ]
+        },
+
+        {
+          "name": "SLIDES",
+          "description": [
+            "Introduction to Web Development.",
+            "Creating an HTTP Server with Node.js",
+            "Creating a React Application.",
+            "Deploying to Netlify",
+            "Deploying multiple branches in Netlify"
+          ]
+        }       
+      ]
+    },
+
+    {
+      "_id": "CS5610",
+      "name": "Week 1 - HTML",
+      "description": "Understanding rocket fuel, combustion processes, and efficiency.",
+      "course": "CS5610",
+      "lessons": [
+        {
+          "name": "LEARNING OBJECTIVES",
+          "description":[ "Learn how to create user interfaces with HTML.",
+          "Keep working on assignment 1",
+          "Deploy the assignment to Netlify"
+        ]
+        },
+
+        {
+          "name": "READING",
+          "description": ["Full Stack Developer - Chapter 1 - Introduction.",
+          "Full Stack Developer - Chapter 2 - Creating User Interfaces With HTML"
+        ]
+        },
+
+        {
+          "name": "SLIDES",
+          "description": [
+          "Introduction to HTML and the DOM.",
+          "Formatting Web content with Headings and Paragraphs",
+          "Formatting content with Lists and Tables",
+          "Creating Web Forms",
+          "Navigating with Anchors"
+      ]
+    }
+  ]
+}
+]

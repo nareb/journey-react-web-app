@@ -1,3 +1,9 @@
 import courses from "./courses.json";
-export default {
-courses, };
+import modules from './modules.json'
+
+
+const database = {
+courses,
+modules };
+
+export default database;

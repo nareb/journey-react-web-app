@@ -2,6 +2,8 @@ import Home from "./home";
 //import Login from "./login";
 //import Profile from "./profile";
 import Dashboard from "./Dashboard";
+import Page1 from "./Page1";
+import Courses from "./Courses";
 import Search from "./search";
 import Details from "./details";
 import Profile from "./profile";
@@ -35,8 +37,9 @@ function Project() {
             <div className="col-10">
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Dashboard/>} />
                 <Route path="/home" element={<Home/>} />
-                <Route path="/details" element={<Dashboard/>}/>
+                
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/account" element={<Account />} />
@@ -47,6 +50,10 @@ function Project() {
                 <Route path="/users" element={<UserList />} />
                 <Route path="/admin/users" element={<UserTable />} />
                 <Route path="/users/:id" element={<UserDetails />} />
+                <Route path="Courses/:courseId/*" element={<Courses />} />
+                <Route path="/details" element={<Dashboard/>}/>
+                
+          />
               </Routes>
             </div>
             
