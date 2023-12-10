@@ -11,7 +11,7 @@ function Nav() {
     { to: "/project/search", label: "Search" },
     { to: "/project/details", label: "Details" },
     { to: "/project/profile", label: "Profile" },
-    { to: "/project/signin", label: "Signin" },
+    //{ to: "/project/signin", label: "Signin" },
     { to: "/project/account", label: "Account" },
     { to: "/project/signup", label: "Signup" },
     
