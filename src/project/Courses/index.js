@@ -3,7 +3,7 @@ import { useLocation, Navigate, Route, Routes, useParams } from "react-router-do
 import CourseNavigation from "./CourseNavigation";
 import Modules from "./Modules";
 
-function Courses() {
+function Courses({courses}) {
   const { courseId } = useParams();
   const {pathname} = useLocation();
   const [, , , , screen] = pathname.split("/");
@@ -21,7 +21,7 @@ function Courses() {
             }}
           >
             <Routes>
-                <Route path="Modules" element={<h1>Modules</h1>} />
+                <Route path="Modules" element={<h1></h1>} />
             </Routes>
           </div>
       </div>

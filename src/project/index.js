@@ -7,9 +7,10 @@ import Courses from "./Courses";
 import Search from "./search";
 import Details from "./details";
 import Profile from "./profile";
-import { Routes, Route} from "react-router-dom";
-//import { Routes, Route, Link } from "react-router-dom";
-//import { useState } from "react";
+import db from "./Database";
+//import { Routes, Route} from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 import UserList from "./users/list";
 import UserTable from "./users/table";
 import UserDetails from "./users/details";
@@ -23,6 +24,28 @@ import CurrentUser from "./users/currentUser";
 
 function Project() {
   //const [key, setKey] = useState("home");
+  const [courses, setCourses] = useState(db.courses);
+  const [course, setCourse] = useState({
+    name: "New Course",      number: "New Number",
+    startDate: "2023-09-10", endDate: "2023-12-15",
+  });
+  const addNewCourse = () => {
+    setCourses([...courses, { ...course, _id: new Date().getTime().toString() }]);
+  };
+  const deleteCourse = (courseId) => {
+    setCourses(courses.filter((course) => course._id !== courseId));
+  };
+  const updateCourse = () => {
+    setCourses(
+      courses.map((c) => {
+        if (c._id === course._id) {
+          return course;
+        } else {
+            return c;
+        }
+      })
+    );
+  };
 
   return (
     //<Provider store={store}>
@@ -37,7 +60,16 @@ function Project() {
             <div className="col-10">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/home" element={<Dashboard/>} />
+                <Route path="/home" element={
+                  <Dashboard
+                    courses={courses}
+                    course={course}
+                    setCourse={setCourse}
+                    addNewCourse={addNewCourse}
+                    deleteCourse={deleteCourse}
+                    updateCourse={updateCourse}
+                  />
+                } />
                 <Route path="/home" element={<Home/>} />
                 
                 <Route path="/signin" element={<SignIn />} />
