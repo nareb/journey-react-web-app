@@ -9,6 +9,20 @@ function Home() {
   const { currentUser } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [status, setStatus] = useState(""); // New state for user status
+
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
+
+  const postStatus = () => {
+    // Implement the logic to post the status
+    console.log("Posted status:", status);
+
+    // Clear the status input field after posting
+    setStatus("");
+  };
+
   const signout = async () => {
     await client.signout();
     dispatch(setCurrentUser(null));
@@ -30,7 +44,21 @@ function Home() {
       <div className="card-body">
         <div>
           <h1>Welcome {currentUser ? currentUser.username : "New user"}</h1>
-          <pre>{JSON.stringify(currentUser)}</pre>
+
+            {/* User status input */}
+            {currentUser && (
+              <>
+                <textarea
+                  value={status}
+                  onChange={handleStatusChange}
+                  placeholder="What's on your mind?"
+                />
+                <button onClick={postStatus}>Post Status</button>
+              </>
+            )}
+
+
+          
         </div>
       </div>
     </div>
