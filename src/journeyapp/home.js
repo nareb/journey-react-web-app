@@ -34,7 +34,7 @@ function Home() {
       // Update Redux store with the new status
       const updatedStatus = await response.json();
 
-      
+
       dispatch(addStatus(updatedStatus));
 
       // Clear the status input field after posting
@@ -54,7 +54,7 @@ function Home() {
     <div className="container mt-4">
       <div className="card">
         <div className="card-header d-flex justify-content-between align-items-center">
-            <h4>Home</h4>
+            <h4>Welcome Home {currentUser ? currentUser.username : "New user"}!</h4>
             {currentUser && (
               <button onClick={signout} className="btn btn-danger btn-sm">
                 Sign out
@@ -63,7 +63,7 @@ function Home() {
           </div>
         
         <div className="card-body">
-            <h1 className="mb-4">Welcome {currentUser ? currentUser.username : "New user"}</h1>
+            
 
               {/* User status input */}
               {currentUser && (
