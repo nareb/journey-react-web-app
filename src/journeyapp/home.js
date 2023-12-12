@@ -12,32 +12,36 @@ function Home() {
   const [status, setStatus] = useState(""); // New state for user status
   //const [newStatus, setNewStatus] = useState(null); // New state for individual status
 
-  // Retrieve statusList from local storage on component mount
-  useEffect(() => {
-    const storedStatusList = JSON.parse(localStorage.getItem("statusList")) || [];
-    storedStatusList.forEach((status) => {
-      dispatch(addStatus(status));
-    });
-  }, [dispatch]);
-
-
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
 
-  const postStatus = () => {
-    // Update Redux store with the new status
-    dispatch(addStatus({ user: currentUser, status }));
+  const postStatus = async () => {
+    try {
+      // Call backend API to post the status
+      const response = await fetch(`/api/users/${currentUser._id}/post-status`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status }),
+      });
 
-    // Save the updated statusList to local storage
-    const updatedStatusList = [...statusList, { user: currentUser, status }];
-    localStorage.setItem("statusList", JSON.stringify(updatedStatusList));
+      if (!response.ok) {
+        throw new Error("Failed to post status");
+      }
 
-    // Implement the logic to post the status
-    console.log("Posted status:", status);
+      // Update Redux store with the new status
+      const updatedStatus = await response.json();
 
-    // Clear the status input field after posting
-    setStatus("");
+      
+      dispatch(addStatus(updatedStatus));
+
+      // Clear the status input field after posting
+      setStatus("");
+    } catch (error) {
+      console.error("Error posting status:", error);
+    }
   };
 
   const signout = async () => {
