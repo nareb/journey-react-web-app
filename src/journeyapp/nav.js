@@ -17,7 +17,7 @@ function Nav() {
   const links = [
     { to: "/journey/home", icon: "home", label: "Home" },
     { to: "/journey/profile", icon: "profile", label: "Profile" },
-    { to: "/journey/details", icon: "details", label: "Details" },
+    { to: "/journey/movie/details", icon: "details", label: "Details" },
     { to: "/journey/login", icon: "login", label: "Login" },
     // { to: "/journey/search", icon: "search", label: "Search" },
     { to: "/journey/moviesearch", icon: "search", label: "Search" },

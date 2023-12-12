@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Nav from "./nav";
 import Home from "./home";
 import Profile from "./profile";
-import Details from "./album/details";
+//import Details from "./movie/details";
 import Login from "./users/login";
 import Register from "./users/register";
 import Search from "./search";
@@ -12,7 +12,7 @@ import CurrentUser from "./users/currentUser";
 import JDetails from "./details";
 import UserTable from "./users/table";
 import MovieSearch from "./movieSearch";
-import MovieDetails from "./movie/details";
+import MovieDetails from "./details";
 
 function Journey() {
   return (
@@ -29,7 +29,6 @@ function Journey() {
                 <Route path="/" element={<Home />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/details" element={<JDetails />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/search" element={<Search />} />
@@ -37,11 +36,8 @@ function Journey() {
                 <Route path="/moviesearch" element={<MovieSearch />} />
                 <Route path="/moviesearch/:search" element={<MovieSearch />} />
                 <Route path="/users" element={<UserTable />} />
-                <Route path="/album/details/:albumId" element={<Details />} />
-                <Route
-                  path="/movie/details/:movieId"
-                  element={<MovieDetails />}
-                />
+                <Route path="/movie/details/:movieId" element={<JDetails />} />
+                
               </Routes>
             </div>
           </div>
