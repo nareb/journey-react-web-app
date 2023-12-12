@@ -54,7 +54,7 @@ function Home() {
     <div className="container mt-4">
       <div className="card">
         <div className="card-header d-flex justify-content-between align-items-center">
-            <h4>Welcome Home {currentUser ? currentUser.username : "New user"}!</h4>
+            <h4>Welcome Home {currentUser ? currentUser.firstName : "New user"}!</h4>
             {currentUser && (
               <button onClick={signout} className="btn btn-danger btn-sm">
                 Sign out
