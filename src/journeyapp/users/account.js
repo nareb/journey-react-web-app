@@ -15,7 +15,7 @@ function Account() {
       const user = await client.account();
       setUser(user);
     } catch (error) {
-      navigate("/project/signin");
+      navigate("/journey/login");
     }
   }, [navigate]);
 
@@ -27,7 +27,7 @@ function Account() {
     //const status = await client.signout();
     await client.signout();
     dispatch(setCurrentUser(null));
-    navigate("/project/signin");
+    navigate("/journey/login");
   };
   useEffect(() => {
     fetchUser();
@@ -67,7 +67,7 @@ function Account() {
           
           {user.role === "ADMIN" && (
 
-            <Link to="/project/admin/users" className="btn btn-warning">
+            <Link to="/journey/users" className="btn btn-warning">
             Users
             </Link>
 
