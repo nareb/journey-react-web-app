@@ -2,19 +2,26 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser, addStatus } from "./users/userReducer";
 import { current } from "@reduxjs/toolkit";
-import * as client from "./users/client";
+import * as userClient from "./users/client";
+import * as client from "./client";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 function Home() {
   const { currentUser, statusList } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [status, setStatus] = useState(""); // New state for user status
-  //const [newStatus, setNewStatus] = useState(null); // New state for individual status
+  const [results, setResults] = useState(null);
 
   const handleStatusChange = (e) => {
     setStatus(e.target.value);
   };
+
+  const findTrendingMovies = async () => {
+    const results = await client.findTrendingMovies()
+    setResults(results);
+  }
 
   const postStatus = async () => {
     try {
@@ -45,16 +52,20 @@ function Home() {
   };
 
   const signout = async () => {
-    await client.signout();
+    await userClient.signout();
     dispatch(setCurrentUser(null));
     navigate("/journey/login");
   };
+
+  useEffect(() => {
+    findTrendingMovies();
+  }, []);
 
   return (
     <div className="container mt-4">
       <div className="card">
         <div className="card-header d-flex justify-content-between align-items-center">
-            <h4>Welcome Home {currentUser ? currentUser.firstName : "New user"}!</h4>
+            <h4>Welcome {currentUser ? currentUser.firstName : "New user"}!</h4>
             {currentUser && (
               <button onClick={signout} className="btn btn-danger btn-sm">
                 Sign out
@@ -63,6 +74,25 @@ function Home() {
           </div>
         
         <div className="card-body">
+
+        <h3>Top 3 Trending Movies</h3>
+          <ul className="list-group list-group-horizontal">
+            {results &&
+              results.slice(0, 3).map((movie, index) => (
+                <li key={index} className="list-group-item">
+                  <Link to={`/journey/movie/details/${movie.id}`}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                      alt={movie.title}
+                      className="rounded mx-auto d-block"
+                      title={movie.title}
+                      //height="250px"
+                    />
+                    <h5 className="text-center">{movie.title}</h5>
+                  </Link>
+                </li>
+              ))}
+          </ul>
             
 
               {/* User status input */}

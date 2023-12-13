@@ -10,6 +10,14 @@ export const findMovies = async (searchTerm) => {
   );
   return response.data.results;
 };
+
+export const findTrendingMovies = async () => {
+  const response = await axios.get(
+    `${TMDB_API}/trending/movie/day?language=en-US&api_key=${TMDB_API_KEY}`
+  );
+  return response.data.results;
+};
+
 //https://api.themoviedb.org/3/movie/52248?language=en-US&api_key=9edd42fcd0998c23c6fd5504e79db8f6
 export const findMovieById = async (movieId) => {
   const response = await axios.get(
