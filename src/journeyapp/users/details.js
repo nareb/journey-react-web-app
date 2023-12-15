@@ -192,8 +192,8 @@ function UserDetails() {
                   >
                     <option value="USER">User</option>
                     <option value="ADMIN">Admin</option>
-                    <option value="REVIEWER">Faculty</option>
-                    <option value="DIRECTOR">Student</option>
+                    <option value="REVIEWER">Reviewer</option>
+                    <option value="DIRECTOR">Director</option>
                   </select>
                 </div>
               </div>
