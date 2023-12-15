@@ -141,8 +141,8 @@ function Home() {
                     <li key={index} className="list-group-item">
                       <Link to={`/journey/movie/details/${movie.movieId}`}>
                         <img
-                          //src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                          src={`https://image.tmdb.org/t/p/${movie.poster_path}`}
+                          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                          //src={`https://image.tmdb.org/t/p/${movie.poster_path}`}
                           alt={movie.title}
                           className="rounded mx-auto d-block"
                           title={movie.title}
