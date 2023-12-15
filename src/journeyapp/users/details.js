@@ -6,6 +6,7 @@ import * as movieClient from "../client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as followsClient from "../follows/client";
+
 function UserDetails() {
   const [user, setUser] = useState(null);
   const [loves, setLoves] = useState([]);
@@ -224,7 +225,7 @@ function UserDetails() {
           )}
 
           <h3>Loves</h3>
-          <ul className="list-group">
+          <ul className="list-inline list-inline-horizontal-md">
             {loves.map((love, index) => (
               <li key={index} className="list-inline-item">
               <Link to={`/journey/movie/details/${love.movieId}`}>
@@ -256,7 +257,7 @@ function UserDetails() {
               </Link>
             ))}
           </div>
-          
+
           <h3>Following</h3>
           <div className="list-group">
             {following.map((follows, index) => (
