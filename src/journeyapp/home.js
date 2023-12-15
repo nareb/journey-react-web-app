@@ -95,7 +95,13 @@ function Home() {
           </h1>
           {!currentUser && (
             <p>
-              Please <Link to={`/journey/login`}> login </Link> to like movies
+              What is fascinating about movies is we can live the whole journey of someone else's life in 
+              a few hours of time via movies. To help you narrow down your decision whose life you want to 
+              live next few hours, the Search Tab in this page will facilitate you to search movies, browse
+              its details, read others reviews on what they think and make your own choice to select whose journey 
+              of life you want to travel without having to reborn.
+              And if you like to connect with the like-minded people in this webapp,
+              please <Link to={`/journey/login`}> login </Link> to like movies
               or follow other users who have similar interests in movies.
             </p>
           )}
