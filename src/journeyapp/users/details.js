@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import * as client from "./client";
 import * as lovesClient from "../loves/client";
+import * as movieClient from "../client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as followsClient from "../follows/client";
@@ -15,33 +16,48 @@ function UserDetails() {
 
   const fetchLoves = async () => {
     const loves = await lovesClient.findMoviesThatUserLoves(id);
-    setLoves(loves);
+    let rec = [];
+    for (let i = 0; i < loves.length; i++) {
+      let love = loves[i];
+      let movie = await movieClient.findMovieById(love.movieId);
+      love = { ...love, ...movie };
+      rec = [...rec, love];
+      //   console.log(love);
+    }
+    setLoves(rec);
   };
+
   const navigate = useNavigate();
   const fetchUser = async () => {
     const user = await client.findUserById(id);
     setUser(user);
   };
+
   const updateUser = async () => {
     const status = await client.updateUser(id, user);
     //const status = await client.updateFirstName(id, user.firstName);
   };
+
   const deleteUser = async (id) => {
     const status = await client.deleteUserById(id);
     navigate("/journey/users");
   };
+
   const followUser = async () => {
     const status = await followsClient.userFollowsUser(id);
     fetchFollowers();
   };
+
   const unfollowUser = async () => {
     const status = await followsClient.userUnfollowsUser(id);
     fetchFollowers();
   };
+
   const fetchFollowers = async () => {
     const followers = await followsClient.findFollowersOfUser(id);
     setFollowers(followers);
   };
+
   const fetchFollowing = async () => {
     const following = await followsClient.findFollowedUsersByUser(id);
     setFollowing(following);
@@ -55,9 +71,11 @@ function UserDetails() {
       return follows.follower._id === currentUser._id;
     });
   };
+
   const goToLogin = () => {
     navigate("/journey/login");
   };
+
   useEffect(() => {
     fetchUser();
     fetchLoves();
@@ -65,6 +83,7 @@ function UserDetails() {
     fetchFollowing();
     // fetchCurrentUser();
   }, [id]);
+
   return (
     <div>
       {!currentUser ? (
@@ -90,6 +109,7 @@ function UserDetails() {
               )}
             </>
           )}
+
           <h2>User Details</h2>
           {user && currentUser.role === "ADMIN" && (
             <div>
@@ -124,6 +144,7 @@ function UserDetails() {
                   />
                 </div>
               </div>
+
               <div className="mb-3 row">
                 <label htmlFor="lastName" className="col-sm-2 col-form-label">
                   Last Name
@@ -191,22 +212,35 @@ function UserDetails() {
           )}
           {user && currentUser.role !== "ADMIN" && (
             <>
-              <p>Username: {user.username}</p>
-              <p>Email: {user.email}</p>
               <p>First Name: {user.firstName}</p>
               <p>Last Name: {user.lastName}</p>
+              {id === currentUser._id && (
+              <>
+                <p>Username: {user.username}</p>
+                <p>Email: {user.email}</p>
+              </>
+              )}
             </>
           )}
+
           <h3>Loves</h3>
           <ul className="list-group">
             {loves.map((love, index) => (
-              <li key={index} className="list-group-item">
-                <Link to={`/journey/movie/details/${love.movieId}`}>
-                  {love.movieId}
-                </Link>
-              </li>
+              <li key={index} className="list-inline-item">
+              <Link to={`/journey/movie/details/${love.movieId}`}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${love.poster_path}`}
+                  alt={love.title}
+                  className="rounded mx-auto d-block"
+                  title={love.title}
+                  height="150px"
+                />
+                {/* <h5 className="text-center">{love.title}</h5> */}
+              </Link>
+            </li>
             ))}
           </ul>
+
           <h3>Followers</h3>
           <div className="list-group">
             {followers.map((follows, index) => (
@@ -222,6 +256,7 @@ function UserDetails() {
               </Link>
             ))}
           </div>
+          
           <h3>Following</h3>
           <div className="list-group">
             {following.map((follows, index) => (
