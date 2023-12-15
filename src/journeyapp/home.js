@@ -28,9 +28,10 @@ function Home() {
     console.log("recent users: " + JSON.stringify(users));
     setRecentUsers(users);
   };
+
   const fetchMoviesUserLoves = async () => {
     const loves = await lovesClient.findMoviesThatUserLoves(currentUser._id);
-    const recentLoves = loves.slice(-3).reverse();
+    let recentLoves = loves.slice(-3).reverse();
     
     let rec =[];
     for (let i = 0; i < recentLoves.length; i++) {
@@ -51,7 +52,7 @@ function Home() {
       // setLikedMovieDetails(movies);
     });*/
 
-    setLikedMovies(recentLoves);
+    setLikedMovies(rec);
     //console.log("liked movies details:", JSON.stringify(movies));
   };
   /*
@@ -140,11 +141,12 @@ function Home() {
                     <li key={index} className="list-group-item">
                       <Link to={`/journey/movie/details/${movie.movieId}`}>
                         <img
-                          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                          //src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                          src={`https://image.tmdb.org/t/p/${movie.poster_path}`}
                           alt={movie.title}
                           className="rounded mx-auto d-block"
                           title={movie.title}
-                          height="250px"
+                          //height="250px"
                         />
                         <h5 className="text-center">{movie.title}</h5>
                       </Link>
