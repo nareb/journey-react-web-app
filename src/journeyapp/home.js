@@ -17,16 +17,11 @@ function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //   const fetchAlbums = async (search) => {
-  //     const trending = await userClient.findAlbums(search);
-  //     setTrending(trending);
-  //     setSearchTerm(search);
-  //     setIsSearching(false);
-  //   };
   const fetchTrendingMovies = async () => {
     const trending = await client.findTrendingMovies();
     setTrending(trending);
   };
+
   const fetchRecentUsers = async () => {
     const allUsers = await userClient.findAllUsers();
     const users = allUsers.slice(-5).reverse();
@@ -36,7 +31,17 @@ function Home() {
   const fetchMoviesUserLoves = async () => {
     const loves = await lovesClient.findMoviesThatUserLoves(currentUser._id);
     const recentLoves = loves.slice(-3).reverse();
+    
+    let rec =[];
+    for (let i = 0; i < recentLoves.length; i++) {
+      let love = recentLoves[i];
+      let movie = await client.findMovieById(love.movieId);
+      love = { ...love, ...movie };
+      rec = [...rec, love];
+    }
+
     // console.log("user loves: " + JSON.stringify(recentLoves));
+    /*
     var movies = [];
     recentLoves.forEach(async (love) => {
       const movie = await client.findMovieById(love.movieId);
@@ -44,16 +49,19 @@ function Home() {
       movies = [...movies, movie];
       // movies = [...movies, movie];
       // setLikedMovieDetails(movies);
-    });
+    });*/
+
     setLikedMovies(recentLoves);
-    console.log("liked movies details:", JSON.stringify(movies));
+    //console.log("liked movies details:", JSON.stringify(movies));
   };
+  /*
   const getMoviePoster = (movieId) => {
     const mov = likedMovieDetails.find((movie) => movie.movieId === movieId);
     return mov.poster_path;
     // const movie = await client.findMovieById(movieId);
     // return movie.poster_path;
   };
+  */
 
   const signout = async () => {
     await userClient.signout();
@@ -131,16 +139,14 @@ function Home() {
                   likedMovies.map((movie, index) => (
                     <li key={index} className="list-group-item">
                       <Link to={`/journey/movie/details/${movie.movieId}`}>
-                        {/* <img
-                          src={`https://image.tmdb.org/t/p/w200${getMoviePoster(
-                            movie.movieId
-                          )}`}
+                        <img
+                          src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                           alt={movie.title}
                           className="rounded mx-auto d-block"
                           title={movie.title}
-                          //height="250px"
-                        /> */}
-                        <h5 className="text-center">{movie.movieId}</h5>
+                          height="250px"
+                        />
+                        <h5 className="text-center">{movie.title}</h5>
                       </Link>
                     </li>
                   ))
