@@ -5,7 +5,7 @@ import Profile from "./profile";
 //import Details from "./movie/details";
 import Login from "./users/login";
 import Register from "./users/register";
-import Search from "./search";
+//import Search from "./search";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import store from "./store";
 import CurrentUser from "./users/currentUser";
@@ -32,8 +32,6 @@ function Journey() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/search" element={<Search />} />
-                <Route path="/search/:search" element={<Search />} />
                 <Route path="/moviesearch" element={<MovieSearch />} />
                 <Route path="/moviesearch/:search" element={<MovieSearch />} />
                 <Route path="/users" element={<UserTable />} />
