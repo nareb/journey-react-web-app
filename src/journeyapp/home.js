@@ -96,7 +96,7 @@ function Home() {
           {!currentUser && (
             <p>
               Please <Link to={`/journey/login`}> login </Link> to like movies
-              or follow other users who have similar interests. movies.
+              or follow other users who have similar interests in movies.
             </p>
           )}
           <h3>Recently joined users</h3>
