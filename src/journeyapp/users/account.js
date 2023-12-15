@@ -10,7 +10,7 @@ function Account() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const fetchUser = useCallback (async () => {
+  const fetchUser = useCallback(async () => {
     try {
       const user = await client.account();
       setUser(user);
@@ -32,7 +32,7 @@ function Account() {
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
-  
+
   return (
     <div>
       <h1>Account</h1>
@@ -64,13 +64,10 @@ function Account() {
             Update
           </button>
 
-          
           {user.role === "ADMIN" && (
-
-            <Link to="/journey/users" className="btn btn-warning">
-            Users
+            <Link to="/project/admin/users" className="btn btn-warning">
+              Users
             </Link>
-
           )}
         </div>
       )}

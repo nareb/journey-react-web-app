@@ -9,6 +9,7 @@ import {
   BsArrowRight,
 } from "react-icons/bs";
 import * as client from "./client";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
 function UserTable() {
   //const [role, setRole] = useState("USER");
@@ -77,110 +78,46 @@ function UserTable() {
     fetchUsers();
   }, []);
   return (
-    <div>
-      <h1>User List</h1>
-      <div className="table-responsive">
-        <table className="table table-bordered table-hover table-sm">
-          <thead>
-            <tr>
-              <th>Username</th>
-              {/* <th>Password</th> */}
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Role</th>
-            </tr>
-            <tr>
-              <td>
-                <input
-                  value={user.username}
-                  placeholder="Username"
-                  onChange={(e) =>
-                    setUser({ ...user, username: e.target.value })
-                  }
-                />
-                <input
-                  type="password" // Set the type to "password" to hide characters
-                  placeholder="Password"
-                  value={user.password}
-                  onChange={(e) =>
-                    setUser({ ...user, password: e.target.value })
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  value={user.firstName}
-                  placeholder="First Name"
-                  onChange={(e) =>
-                    setUser({ ...user, firstName: e.target.value })
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  value={user.lastName}
-                  placeholder="Last Name"
-                  onChange={(e) =>
-                    setUser({ ...user, lastName: e.target.value })
-                  }
-                />
-              </td>
-              <td>
-                <select
-                  value={user.role}
-                  onChange={(e) => setUser({ ...user, role: e.target.value })}
-                >
-                  <option value="USER">User</option>
-                  <option value="ADMIN">Admin</option>
-                  <option value="FACULTY">Faculty</option>
-                  <option value="STUDENT">Student</option>
-                </select>
-              </td>
-
-              <td className="text-nowrap">
-                <BsPlusCircleFill
-                  onClick={createUser}
-                  className="text-default fs-1 text"
-                />
-                <BsFillCheckCircleFill
-                  onClick={updateUser}
-                  className="me-2 text-success fs-1 text"
-                />
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user._id}>
-                <td>
-                  <Link
-                    key={user._id}
-                    to={`/journey/users/${user._id}`}
-                    className="list-group-item"
-                  >
-                    {user.username}
-                  </Link>
-                </td>
-                {/* <td>*****</td> */}
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-                <td>{user.role}</td>
-                <td className="text-nowrap">
-                  <button className="btn btn-warning me-2">
-                    <BsPencil onClick={() => selectUser(user)} />
-                  </button>
-                  <button className="btn btn-danger me-2">
-                    <BsTrash3Fill onClick={() => deleteUser(user)} />
-                  </button>
-                  <BsArrowRight
-                    onClick={() => navigate(`/journey/account/${user._id}`)}
-                    className="text-success fs-1 text"
-                  />
-                </td>
+    <div className="card">
+      <div className="card-header">
+        <div className="d-flex justify-content-between">
+          <h4>User List</h4>
+        </div>
+      </div>
+      <div className="card-body">
+        <div className="table-responsive">
+          <table className="table table-striped table-hover table-sm">
+            <thead className="table-dark">
+              <tr>
+                <th>Username</th>
+                {/* <th>Password</th> */}
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Role</th>
+                <th></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.username}</td>
+                  <td>{user.firstName}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.role}</td>
+                  <td className="text-nowrap">
+                    <Link
+                      key={user._id}
+                      to={`/journey/users/${user._id}`}
+                      className="list-group-item"
+                    >
+                      <FaArrowAltCircleRight className="text-success fs-4" />
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

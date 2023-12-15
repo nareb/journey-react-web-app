@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 
 function Register() {
   const [myuser, setUser] = useState({
-    firstname: "",
-    lastname: "",
+    firstName: "",
+    lastName: "",
     username: "",
     password: "",
   });
@@ -54,13 +54,13 @@ function Register() {
         <div className="mb-3">
           <label className="form-label">First Name</label>
           <input
-            name="firstname"
+            name="firstName"
             type="text"
-            value={myuser.firstname}
+            value={myuser.firstName}
             onChange={(e) => {
               setUser({
                 ...myuser,
-                firstname: e.target.value,
+                firstName: e.target.value,
               });
             }}
             className={`form-control ${error ? "is-invalid" : ""}`}
@@ -69,13 +69,13 @@ function Register() {
         <div className="mb-3">
           <label className="form-label">Last Name</label>
           <input
-            name="lastname"
+            name="lastName"
             type="text"
-            value={myuser.lastname}
+            value={myuser.lastName}
             onChange={(e) => {
               setUser({
                 ...myuser,
-                lastname: e.target.value,
+                lastName: e.target.value,
               });
             }}
             className={`form-control ${error ? "is-invalid" : ""}`}

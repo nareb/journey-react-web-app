@@ -15,8 +15,14 @@ export const account = async () => {
   const response = await request.post(`${USERS_API}/account`);
   return response.data;
 };
-export const updateUser = async (user) => {
-  const response = await request.put(`${USERS_API}/${user._id}`, user);
+export const updateUser = async (id, user) => {
+  const response = await request.put(`${USERS_API}/${id}`, user);
+  return response.data;
+};
+export const updateFirstName = async (id, firstName) => {
+  const response = await request.put(
+    `${USERS_API}/updateFirstName/${id}/${firstName}`
+  );
   return response.data;
 };
 export const findAllUsers = async () => {
@@ -33,6 +39,10 @@ export const findUserById = async (id) => {
 };
 export const deleteUser = async (user) => {
   const response = await request.delete(`${USERS_API}/${user._id}`);
+  return response.data;
+};
+export const deleteUserById = async (id) => {
+  const response = await request.delete(`${USERS_API}/${id}`);
   return response.data;
 };
 export const signup = async (user) => {
