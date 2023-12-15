@@ -25,9 +25,14 @@ function Nav() {
   ];
   const active = (path) => (pathname.includes(path) ? "active" : "");
   const { currentUser } = useSelector((state) => state.userReducer);
+  // const someLinks = !currentUser
+  //   ? links.filter((link) => link.label !== "Users")
+  //   : links.filter((link) => link.label !== "Login");
   const someLinks = !currentUser
-    ? links.filter((link) => link.label !== "Users")
-    : links.filter((link) => link.label !== "Login");
+    ? links.filter((link) => ["Home", "Login", "Search"].includes(link.label))
+    : currentUser.role !== "ADMIN"
+    ? links.filter((link) => !["Login", "Details"].includes(link.label))
+    : links.filter((link) => !["Login", "Details"].includes(link.label));
 
   return (
     <div className="list-group">
@@ -45,10 +50,10 @@ function Nav() {
             <FaInfoCircle />
           ) : link.icon === "login" ? (
             <FaSignInAlt />
-          ) : link.icon === "users" ? (
-            <FaUsers />
-          ) : (
+          ) : link.icon === "search" ? (
             <FaSearch />
+          ) : (
+            <FaUsers />
           )}
           &nbsp;&nbsp;
           {link.label}

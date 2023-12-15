@@ -13,6 +13,7 @@ import JDetails from "./details";
 import UserTable from "./users/table";
 import MovieSearch from "./movieSearch";
 import MovieDetails from "./details";
+import UserDetails from "./users/details";
 
 function Journey() {
   return (
@@ -36,8 +37,8 @@ function Journey() {
                 <Route path="/moviesearch" element={<MovieSearch />} />
                 <Route path="/moviesearch/:search" element={<MovieSearch />} />
                 <Route path="/users" element={<UserTable />} />
+                <Route path="/users/:id" element={<UserDetails />} />
                 <Route path="/movie/details/:movieId" element={<JDetails />} />
-                
               </Routes>
             </div>
           </div>

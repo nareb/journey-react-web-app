@@ -1,54 +1,58 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setCurrentUser, addStatus } from "./users/userReducer";
+import { setCurrentUser } from "./users/userReducer";
 import { current } from "@reduxjs/toolkit";
 import * as userClient from "./users/client";
 import * as client from "./client";
+import * as lovesClient from "./loves/client";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 
 function Home() {
-  const { currentUser, statusList } = useSelector((state) => state.userReducer);
+  const [recentUsers, setRecentUsers] = useState([]);
+  const [trending, setTrending] = useState(null);
+  const [likedMovies, setLikedMovies] = useState([]);
+  const [likedMovieDetails, setLikedMovieDetails] = useState([]);
+  const { currentUser } = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [status, setStatus] = useState(""); // New state for user status
-  const [results, setResults] = useState(null);
 
-  const handleStatusChange = (e) => {
-    setStatus(e.target.value);
+  //   const fetchAlbums = async (search) => {
+  //     const trending = await userClient.findAlbums(search);
+  //     setTrending(trending);
+  //     setSearchTerm(search);
+  //     setIsSearching(false);
+  //   };
+  const fetchTrendingMovies = async () => {
+    const trending = await client.findTrendingMovies();
+    setTrending(trending);
   };
-
-  const findTrendingMovies = async () => {
-    const results = await client.findTrendingMovies()
-    setResults(results);
-  }
-
-  const postStatus = async () => {
-    try {
-      // Call backend API to post the status
-      const response = await fetch(`/api/users/${currentUser._id}/post-status`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to post status");
-      }
-
-      // Update Redux store with the new status
-      const updatedStatus = await response.json();
-
-
-      dispatch(addStatus(updatedStatus));
-
-      // Clear the status input field after posting
-      setStatus("");
-    } catch (error) {
-      console.error("Error posting status:", error);
-    }
+  const fetchRecentUsers = async () => {
+    const allUsers = await userClient.findAllUsers();
+    const users = allUsers.slice(-5).reverse();
+    console.log("recent users: " + JSON.stringify(users));
+    setRecentUsers(users);
+  };
+  const fetchMoviesUserLoves = async () => {
+    const loves = await lovesClient.findMoviesThatUserLoves(currentUser._id);
+    const recentLoves = loves.slice(-3).reverse();
+    // console.log("user loves: " + JSON.stringify(recentLoves));
+    var movies = [];
+    recentLoves.forEach(async (love) => {
+      const movie = await client.findMovieById(love.movieId);
+      love = { ...love, title: movie.title };
+      movies = [...movies, movie];
+      // movies = [...movies, movie];
+      // setLikedMovieDetails(movies);
+    });
+    setLikedMovies(recentLoves);
+    console.log("liked movies details:", JSON.stringify(movies));
+  };
+  const getMoviePoster = (movieId) => {
+    const mov = likedMovieDetails.find((movie) => movie.movieId === movieId);
+    return mov.poster_path;
+    // const movie = await client.findMovieById(movieId);
+    // return movie.poster_path;
   };
 
   const signout = async () => {
@@ -58,27 +62,92 @@ function Home() {
   };
 
   useEffect(() => {
-    findTrendingMovies();
+    fetchTrendingMovies();
+    fetchRecentUsers();
+    if (currentUser) {
+      fetchMoviesUserLoves();
+    }
   }, []);
 
   return (
-    <div className="container mt-4">
-      <div className="card">
-        <div className="card-header d-flex justify-content-between align-items-center">
-            <h4>Welcome {currentUser ? currentUser.firstName : "New user"}!</h4>
-            {currentUser && (
-              <button onClick={signout} className="btn btn-danger btn-sm">
-                Sign out
-              </button>
+    <div className="card">
+      <h4 className="card-header">
+        <div className="d-flex justify-content-between">
+          <span>Home</span>
+          {currentUser && (
+            <button onClick={signout} className="btn btn-danger btn-sm">
+              Sign out
+            </button>
+          )}
+        </div>
+      </h4>
+      <div className="card-body">
+        <div>
+          <h1>
+            Welcome{" "}
+            {currentUser ? (
+              <span>
+                {currentUser.firstName} {currentUser.lastName}
+              </span>
+            ) : (
+              "New user"
             )}
-          </div>
-        
-        <div className="card-body">
-
-        <h3>Top 3 Trending Movies</h3>
-          <ul className="list-group list-group-horizontal">
-            {results &&
-              results.slice(0, 3).map((movie, index) => (
+          </h1>
+          {!currentUser && (
+            <p>
+              Please <Link to={`/journey/login`}> login </Link> to like movies
+              or follow other users who have similar interests. movies.
+            </p>
+          )}
+          <h3>Recently joined users</h3>
+          <ul className="list-group">
+            {recentUsers.map((user, index) => (
+              <li key={index} className="list-group-item">
+                {currentUser ? (
+                  <Link to={`/journey/users/${user._id}`}>
+                    <span>
+                      {user.firstName} {user.lastName} (@{user.username})
+                    </span>
+                  </Link>
+                ) : (
+                  <span>
+                    {user.firstName} {user.lastName} (@{user.username})
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+          {currentUser && (
+            <>
+              <h3>Recently Liked Movies</h3>
+              <ul className="list-group list-group-horizontal-md">
+                {likedMovies && likedMovies.length > 0 ? (
+                  likedMovies.map((movie, index) => (
+                    <li key={index} className="list-group-item">
+                      <Link to={`/journey/movie/details/${movie.movieId}`}>
+                        {/* <img
+                          src={`https://image.tmdb.org/t/p/w200${getMoviePoster(
+                            movie.movieId
+                          )}`}
+                          alt={movie.title}
+                          className="rounded mx-auto d-block"
+                          title={movie.title}
+                          //height="250px"
+                        /> */}
+                        <h5 className="text-center">{movie.movieId}</h5>
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <div>None</div>
+                )}
+              </ul>
+            </>
+          )}
+          <h3>Top 3 Trending Movies</h3>
+          <ul className="list-group list-group-horizontal-md">
+            {trending &&
+              trending.slice(0, 3).map((movie, index) => (
                 <li key={index} className="list-group-item">
                   <Link to={`/journey/movie/details/${movie.id}`}>
                     <img
@@ -93,38 +162,7 @@ function Home() {
                 </li>
               ))}
           </ul>
-            
-
-              {/* User status input */}
-              {currentUser && (
-                <div className="mb-4">
-                  <textarea
-                    value={status}
-                    onChange={handleStatusChange}
-                    className="form-control"
-                    placeholder="What's on your mind?"
-                    rows="3"
-                  />
-
-                  <button onClick={postStatus} className="btn btn-primary mt-2">
-                    Post Status
-                  </button>
-                </div>
-              )}
-
-              {/* Display user statuses */}
-              {statusList.slice().reverse().map((userStatus, index) => (
-                <div key={index} className="mt-3">
-                  <div className="card">
-                    <div className="card-body">
-                      <h5 className="card-title">
-                        <strong>{userStatus?.user?.username}:</strong> 
-                      </h5>
-                      <p className="card-text">{userStatus?.status}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}          
+          <pre>{JSON.stringify(currentUser)}</pre>
         </div>
       </div>
     </div>

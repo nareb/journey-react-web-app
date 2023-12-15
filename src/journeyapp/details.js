@@ -3,54 +3,50 @@ import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import * as client from "./client";
 import * as userClient from "./users/client";
-import * as likesClient from "./likes/client";
+import * as lovesClient from "./loves/client";
 import { useCallback } from "react";
+import MediaIcons from "./mediaicons";
 
 function MovieDetails() {
-  const [currentUser, setCurrentUser] = useState(null);
+  // const [currentUser, setCurrentUser] = useState(null);
+  const { currentUser } = useSelector((state) => state.userReducer);
   const [movie, setMovie] = useState(null);
   const [reviews, setReviews] = useState([]);
   const { movieId } = useParams();
-  const [likes, setLikes] = useState([]);
+  const [loves, setLoves] = useState([]);
 
-  const fetchUser = useCallback (async () => {
-    try {
-      const user = await userClient.account();
-      setCurrentUser(user);
-    } catch (error) {
-      setCurrentUser(null);
-    }
-  },[]);
-
-  const fetchMovie = useCallback(async () => {
+  const fetchMovie = async () => {
     const movie = await client.findMovieById(movieId);
     setMovie(movie);
-  }, [movieId]);
-
-  const fetchReviews = useCallback(async () => {
+  };
+  const fetchReviews = async () => {
     const reviews = await client.findReviewsById(movieId);
     setReviews(reviews);
-  }, [movieId]);
+  };
 
-  const fetchLikes = useCallback (async () => {
-    const likes = await likesClient.findUsersThatLikeMovie(movieId);
-    setLikes(likes);
-  }, [movieId]);
-
-  const currenUserLikesMovie = async () => {
-    const _likes = await likesClient.createUserLikesMovie(
+  const fetchLoves = async () => {
+    const loves = await lovesClient.findUsersThatLoveMovie(movieId);
+    setLoves(loves);
+  };
+  const currentUserLovesMovie = async () => {
+    const _loves = await lovesClient.createUserLovesMovie(
       currentUser._id,
       movieId
     );
-    setLikes([_likes, ...likes]);
+    setLoves([_loves, ...loves]);
+    fetchLoves();
+  };
+  const currentUserAlreadyLovesThisMovie = () => {
+    return loves.some((movie) => {
+      return movie.movieId === movieId && movie.user._id === currentUser._id;
+    });
   };
 
   useEffect(() => {
     fetchMovie();
     fetchReviews();
-    fetchUser();
-    fetchLikes();
-  }, [fetchMovie, fetchReviews, fetchUser, fetchLikes]);
+    fetchLoves();
+  }, []);
 
   return (
     <div className="card">
@@ -60,14 +56,23 @@ function MovieDetails() {
           {movie && (
             <div>
               <div>
-                {currentUser && (
+                {/* {currentUser && <MediaIcons />} */}
+                {currentUser && !currentUserAlreadyLovesThisMovie() && (
                   <button
-                    onClick={currenUserLikesMovie}
+                    onClick={currentUserLovesMovie}
                     className="btn btn-warning float-end"
                   >
-                    Like
+                    Love
                   </button>
                 )}
+                {/* {currentUser && (
+                  <button
+                    // onClick={}
+                    className="btn btn-primary float-end"
+                  >
+                    Add to Watchlist
+                  </button>
+                )} */}
                 <h1>{movie.name}</h1>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -76,19 +81,27 @@ function MovieDetails() {
                   //height="50px"
                 />
 
-                <h2>Likes</h2>
-                          <ul className="list-group">
-                            {likes.map((like, index) => (
-                              <li key={index} className="list-group-item">
-                                {like.user.firstName} {like.user.lastName}
-                                <Link to={`/project/users/${like.user._id}`}>
-                                  @{like.user.username}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-
-
+                <h2>Loves</h2>
+                <ul className="list-group">
+                  {loves.map((love, index) => (
+                    <li key={index} className="list-group-item">
+                      {currentUser ? (
+                        <Link to={`/journey/users/${love.user._id}`}>
+                          <span>
+                            {love.user.firstName} {love.user.lastName} (@
+                            {love.user.username})
+                          </span>
+                        </Link>
+                      ) : (
+                        <span>
+                          {love.user.firstName} {love.user.lastName} (@
+                          {love.user.username})
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {/* <h2>Users WatchList</h2> */}
               </div>
               <h3>Overview</h3>
               {movie.overview}

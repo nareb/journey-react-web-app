@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import * as client from "./client";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { FaThumbsUp } from "react-icons/fa";
+import { FaEye, FaHeart, FaThumbsUp } from "react-icons/fa";
+import MediaIcons from "./mediaicons";
 
 function MovieSearch() {
   const { search } = useParams();
@@ -84,12 +85,11 @@ function MovieSearch() {
                     <th scope="col">Release Date</th>
                     <th scope="col">Poster</th>
                     <th scope="col"></th>
-                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {results.map((movie, index) => (
-                    <tr>
+                    <tr key={movie.id}>
                       <td>{movie.title}</td>
                       <td>{movie.release_date}</td>
                       <td>
@@ -106,15 +106,6 @@ function MovieSearch() {
                           className="btn btn-outline-primary"
                         >
                           View
-                        </button>
-                      </td>
-                      <td>
-                        <button
-                          type="button"
-                          className="btn btn-outline-warning"
-                          title="Like"
-                        >
-                          <FaThumbsUp />
                         </button>
                       </td>
                     </tr>
